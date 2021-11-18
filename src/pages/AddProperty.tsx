@@ -1,9 +1,10 @@
 import {
-    IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-    IonItem, IonLabel, IonSelectOption, IonSelect, IonDatetime,
-    IonInput, IonButton, useIonToast
+    IonButton, IonContent, IonDatetime, IonHeader,
+    IonInput, IonItem, IonLabel, IonPage, IonRefresher,
+    IonRefresherContent, IonSelect, IonTitle, IonSelectOption, IonToolbar,
+    useIonToast
 } from '@ionic/react';
-import React, {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {insertRecord} from '../databaseHandler';
 
 const Rent: React.FC = () => {
@@ -16,7 +17,7 @@ const Rent: React.FC = () => {
     const [reporter, setReporter] = useState('')
     const [present] = useIonToast()
 
-    const submitClick = async () => {
+    async function submitCLick() {
         const newEntry = {
             property: property,
             bedroom: bedroom,
@@ -25,14 +26,35 @@ const Rent: React.FC = () => {
             furniture: furniture,
             note: note,
             reporter: reporter
-        };
+        }
         if (!property || !bedroom || !date || !price || !reporter) {
-            present("Please enter in the required field", 2000);
+            present('Please enter in the required field', 2000)
         } else {
             await insertRecord(newEntry);
-            present("Finished", 2000);
+            present('Property submitted', 2000)
         }
     }
+
+    function resetState() {
+        setProperty('')
+        setBedroom('')
+        setPrice('')
+        setFurniture('')
+        setNotes('')
+        setReporter('')
+    }
+
+    function doRefresh(event: any) {
+        resetState()
+        setTimeout(() => {
+            console.log('refreshed')
+            event.detail.complete()
+        }, 1000)
+    }
+
+    useEffect(() => {
+        resetState()
+    }, [])
 
     return (
         <IonPage>
@@ -59,8 +81,8 @@ const Rent: React.FC = () => {
                     </IonSelect>
                 </IonItem>
                 <IonItem>
-                    <IonLabel position="stacked">Date (*)</IonLabel>
-                    <IonDatetime disabled value={date}/>
+                    <IonLabel position="stacked">Created date (*)</IonLabel>
+                    <IonDatetime readonly={true} value={date}/>
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Monthly Rent Price (*)</IonLabel>
@@ -82,7 +104,10 @@ const Rent: React.FC = () => {
                     <IonLabel position="stacked">Reporter Name (*)</IonLabel>
                     <IonInput onIonChange={event => setReporter(event.detail.value!)}/>
                 </IonItem>
-                <IonButton expand="block" onClick={submitClick}>Submit</IonButton>
+                <IonButton expand="block" onClick={submitCLick}>Submit</IonButton>
+                <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+                    <IonRefresherContent/>
+                </IonRefresher>
             </IonContent>
         </IonPage>
     );

@@ -1,7 +1,7 @@
 import {Redirect, Route} from 'react-router-dom';
 import {IonApp, IonIcon, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
-import {addCircleOutline, hammerOutline} from 'ionicons/icons'
+import {addCircleOutline, notificationsOutline} from 'ionicons/icons'
 import AddProperty from './pages/AddProperty';
 import NativeFunction from './pages/NativeFunction';
 
@@ -46,7 +46,7 @@ const App: React.FC = () => (
                         Register
                     </IonTabButton>
                     <IonTabButton tab="native-function" href="/native-function">
-                        <IonIcon icon={hammerOutline}/>
+                        <IonIcon icon={notificationsOutline}/>
                         Native functions
                     </IonTabButton>
                 </IonTabBar>
