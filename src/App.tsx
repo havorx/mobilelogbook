@@ -1,9 +1,9 @@
 import {Redirect, Route} from 'react-router-dom';
 import {IonApp, IonIcon, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
-import {addCircleOutline} from 'ionicons/icons'
-import Register from './pages/AddProperty';
-import NativeFunctions from "./pages/nativeFunctions";
+import {addCircleOutline, hammerOutline} from 'ionicons/icons'
+import AddProperty from './pages/AddProperty';
+import NativeFunction from './pages/NativeFunction';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,23 +34,25 @@ const App: React.FC = () => (
                         <Redirect to="/add-property"/>
                     </Route>
                     <Route exact path="/add-property">
-                        <Register/>
+                        <AddProperty/>
                     </Route>
-                    <Route exact path="/native functions">
-                        <NativeFunctions/>
+                    <Route exact path="/native-function">
+                        <NativeFunction/>
                     </Route>
                 </IonRouterOutlet>
                 <IonTabBar slot="bottom">
-                    <IonTabButton tab="register" href="/add-property">
+                    <IonTabButton tab="add-property" href="/add-property">
                         <IonIcon icon={addCircleOutline}/>
-                        Register</IonTabButton>
-                    <IonTabButton tab="native functions" href="/native-functions">
+                        Register
+                    </IonTabButton>
+                    <IonTabButton tab="native-function" href="/native-function">
+                        <IonIcon icon={hammerOutline}/>
                         Native functions
                     </IonTabButton>
                 </IonTabBar>
             </IonTabs>
         </IonReactRouter>
     </IonApp>
-);
+)
 
 export default App;

@@ -1,16 +1,11 @@
 import {
-    IonButton,
-    IonContent,
-    IonHeader,
-    IonItem,
-    IonPage,
-    IonTitle,
-    IonToolbar,
+    IonButton, IonContent, IonHeader, IonItem,
+    IonPage, IonTitle, IonToolbar
 } from "@ionic/react";
 import ReactAudioPlayer from 'react-audio-player';
 import React from "react";
 
-const NativeFunctions: React.FC = () => {
+const NativeFunction: React.FC = () => {
     let musicPlayer: ReactAudioPlayer | null
 
     return (
@@ -36,4 +31,4 @@ const NativeFunctions: React.FC = () => {
     )
 }
 
-export default NativeFunctions
+export default NativeFunction

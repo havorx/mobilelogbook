@@ -3,13 +3,13 @@ import {
     IonItem, IonLabel, IonSelectOption, IonSelect, IonDatetime,
     IonInput, IonButton, useIonToast
 } from '@ionic/react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {insertRecord} from '../databaseHandler';
 
 const Rent: React.FC = () => {
     const [property, setProperty] = useState('')
     const [bedroom, setBedroom] = useState('')
-    const [date, setDate] = useState(new Date().toISOString())
+    const [date] = useState(new Date().toISOString())
     const [price, setPrice] = useState('')
     const [furniture, setFurniture] = useState('')
     const [note, setNotes] = useState('')
@@ -17,7 +17,6 @@ const Rent: React.FC = () => {
     const [present] = useIonToast()
 
     const submitClick = async () => {
-
         const newEntry = {
             property: property,
             bedroom: bedroom,
@@ -39,7 +38,7 @@ const Rent: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>CourseWork</IonTitle>
+                    <IonTitle>RentalZ</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
@@ -61,7 +60,7 @@ const Rent: React.FC = () => {
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Date (*)</IonLabel>
-                    <IonDatetime onIonChange={event => setDate(event.detail.value!)}/>
+                    <IonDatetime disabled value={date}/>
                 </IonItem>
                 <IonItem>
                     <IonLabel position="stacked">Monthly Rent Price (*)</IonLabel>
